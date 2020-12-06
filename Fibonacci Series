@@ -1,0 +1,30 @@
+// 
+//////////////////////////////////////////////////////////////////////////////////
+// fibonacci series and its consecutive Sum after every clk
+
+module test3(output [7:0]sum_fib, output [7:0]out, input clk, rst);
+reg [7:0] sum_fib;
+//reg [7:0]out;
+reg [7:0]n0, n1;
+initial            // this initial block is not required if in the test bench you 'rst' the system first
+    begin
+    n0= 8'd0;
+    n1= 8'd1;
+    sum_fib = 8'd0;
+    end
+
+always@(posedge clk, posedge rst)
+    if(rst)
+    begin
+    n0= 8'd0;
+    n1= 8'd1;
+    
+    end 
+    else begin
+    n1 <= out;
+    n0 <= n1;
+    end      
+assign out = n0 + n1; 
+always@(posedge clk)
+sum_fib <= sum_fib + out;
+endmodule
